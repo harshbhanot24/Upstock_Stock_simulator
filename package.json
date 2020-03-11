@@ -1,0 +1,25 @@
+{
+  "name": "upstocks",
+  "version": "1.0.0",
+  "description": "RealTime stock Monitoring system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "harsh",
+  "license": "ISC",
+  "dependencies": {
+    "decimal.js": "^10.2.0...fdsafsad",
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "line-by-line": "^0.1.6",
+    "lodash": "^4.17.15",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
