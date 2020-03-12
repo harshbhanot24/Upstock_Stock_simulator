@@ -37,7 +37,7 @@ function DataParser(msg, dataHash, barCalculated) {
       dataHash[stockData.sym] = [];
     }
     const { sym="" } = stockData;
-    dataHash[sym].push({
+      dataHash[sym].push({
       event: "ohlc_notify",
       symbol: stockData.sym,
       bar: bar,
@@ -62,7 +62,7 @@ function DataParser(msg, dataHash, barCalculated) {
     const Stockdata = dataHash[stockData.sym];
     const latestStockdata = Stockdata[Stockdata.length - 1];
     if (latestStockdata.bar === barCalculated) {
-      latestStockdata.c = 0.0;
+      latestStockdata.c = 0.0;  
       dataHash[stockData.sym].push({
         event: "ohlc_notify",
         symbol: stockData.sym,
@@ -72,7 +72,7 @@ function DataParser(msg, dataHash, barCalculated) {
         l: stockData.P < latestStockdata.l ? stockData.P : latestStockdata.l,
         c: stockData.P,
         volume: Decimal.add(stockData.Q, latestStockdata.volume),
-        timeStamp: Decimal.mul(stockData.TS2, 1000000000)
+        timeStamp: Decimal.div(stockData.TS2, 1000000000)       
       });
     } else {
       Set(barCalculated, latestStockdata.volume);
