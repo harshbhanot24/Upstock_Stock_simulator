@@ -1,31 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head> </head>
+  <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ </head>
   <body>
-    <h1>Please Enter the value here</h1>
-    <div id="future"></div>
-    <form id="form" id="chat_form">
-      <input id="stock_name" type="text" />
-      <button id="button" type="submit" value="Send" >submit</button>
+  <div class="container">
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1">Stocks Data Simulator</span>
+</nav>
+<br>
+  <div class="row">
+  <div class="col">
+   <div class="card">
+  <div class="card-body">
+  <form id="form" id="chat_form" class="">
+    <p class="card-text">The graph will represent 15 second time interval where Volume vs Time is shown
+    <br>
+    <small>NOTE: The data for empty Time intervals is skipped. Please reload the page to subscribe to new stock, For simulation purpose the data is refreshed after every 5 seconds </small>
+    </p>
+  
+  <div class="form-group">
+  
+    <label class="card-title">Please Enter the Stock  Name</label>
+    <input id="stock_name" class="form-control" type="text" />
+   
+      </div>
+      <div class="form-group">
+       <button id="button" type="submit" value="Send" class="btn btn-primary" >submit</button>
+       </div>
     </form>
-    <br />
-    <br>
-    <br>
+  </div>
+</div>
+  </div>
+  </div>
+ <div class="row">
+     <div class="col">
+     <canvas id="myChart" width="450" height="450"></canvas>
+     </div>
+ </div>
     
-    <canvas id="myChart" width="450" height="450"></canvas>
-
+    
+</div>
     <script src="/jquery/dist/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  
   </body>
   <script>
     var socket = io.connect();
     socket.on("connect", function(data) {
       socket.emit("join", "Hello World from client");
     });
-    socket.on("broad", function(data) {
-      $("#future").append(data + "<br/>");
-    });
+  
     
     socket.on("data", function(message) {
       let vals = [];
@@ -52,34 +78,23 @@
     var myBarChart = Chart.Bar(canvas, {
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7"
         ],
         datasets: [
           {
             label: "Volume Traded",
             data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
+            backgroundColor: "rgba(75, 192, 192, 0.2)"
+            ,
+            borderColor: 
+              "rgba(54, 162, 235, 1)"
+            ,
 
             borderWidth: 1
           }

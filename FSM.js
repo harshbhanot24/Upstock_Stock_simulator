@@ -1,7 +1,4 @@
-const { parentPort, workerData, isMainThread } = require("worker_threads");
-var fs = require("fs");
-const _ = require("lodash");
-const path = require("path");
+const { parentPort, isMainThread } = require("worker_threads");
 let { Decimal } = require("decimal.js");
 
 let startTime = 0;
@@ -23,12 +20,9 @@ if (!isMainThread) {
       }
     }
   });
+  //to get stock name from main
   parentPort.on("message", stock => {
     if (typeof stock === "string") {
-      console.log("stock: ", stock);
-      var writeStream = fs.createWriteStream(
-        path.join(__dirname, "/data.text")
-      );
       if (dataHash[stock]) {
         parentPort.postMessage(JSON.stringify(dataHash[stock]));
       }
@@ -42,7 +36,7 @@ function DataParser(msg, dataHash, barCalculated) {
     if (!vol) {
       dataHash[stockData.sym] = [];
     }
-    const { sym } = stockData;
+    const { sym="" } = stockData;
     dataHash[sym].push({
       event: "ohlc_notify",
       symbol: stockData.sym,
