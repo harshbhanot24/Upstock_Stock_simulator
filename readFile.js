@@ -1,4 +1,4 @@
-const LineByLineReader = require("line-by-line"),
+const LineByLineReader = require("line-by-line");
 const { parentPort, workerData, isMainThread } = require("worker_threads");
   lr = new LineByLineReader("trades.json");
 if (!isMainThread) {
